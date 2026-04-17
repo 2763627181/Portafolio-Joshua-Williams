@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  /** Evita ambigüedad cuando existen lockfiles fuera de esta carpeta. */
+  turbopack: {
+    root: process.cwd(),
+  },
 };
 
 export default nextConfig;
