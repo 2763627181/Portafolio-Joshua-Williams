@@ -35,12 +35,9 @@ export function AboutSection() {
               </div>
             </dl>
             <p className="text-muted border-border border-t pt-4 text-xs leading-relaxed">
-              Los campos marcados como{" "}
-              <code className="text-accent bg-accent/10 rounded px-1 py-0.5 text-[11px]">
-                [PLACEHOLDER_*]
-              </code>{" "}
-              están pensados para que los reemplaces en{" "}
-              <code className="text-foreground/90 text-[11px]">src/data/profile.ts</code>.
+              Formación continua en desarrollo de software, ingeniería ágil y
+              programación orientada a objetos, complementada con proyectos
+              reales desplegados en producción.
             </p>
           </div>
         </div>

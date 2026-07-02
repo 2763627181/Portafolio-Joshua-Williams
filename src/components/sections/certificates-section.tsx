@@ -13,7 +13,7 @@ export function CertificatesSection() {
           className="mb-12"
           eyebrow="Certificaciones"
           title="Formación continua"
-          description="Espacio dedicado a certificaciones (incluidas las de Cursor). Sustituye los placeholders en src/data/certificates.ts y enlaza PDFs o credenciales cuando las tengas."
+          description="Certificaciones en desarrollo web, ingeniería de software, metodologías ágiles y fundamentos de programación, con credenciales verificables."
         />
         <div className="grid gap-6 md:grid-cols-2">
           {certificateItems.map((c) => (
@@ -45,15 +45,9 @@ export function CertificatesSection() {
                     rel="noopener noreferrer"
                     className="text-accent hover:text-accent/80 text-sm font-medium underline-offset-4 hover:underline"
                   >
-                    Ver credencial
+                    {c.url.startsWith("/") ? "Ver certificado (PDF)" : "Ver credencial"}
                   </a>
-                ) : (
-                  <p className="text-muted text-sm">
-                    <span className="text-accent font-medium">Pendiente:</span> añade{" "}
-                    <code className="text-foreground/80 text-xs">url</code> en los datos
-                    cuando tengas el enlace público o el PDF alojado.
-                  </p>
-                )}
+                ) : null}
               </div>
             </article>
           ))}

@@ -13,6 +13,11 @@ export function PersonJsonLd() {
     email: profile.email,
     url,
     sameAs,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Santo Domingo Oeste",
+      addressCountry: "DO",
+    },
     knowsAbout: [
       "Desarrollo web full stack",
       "Next.js",

@@ -5,7 +5,7 @@ export const experienceItems: ExperienceItem[] = [
   {
     id: "exp-1",
     title: "Desarrollo full stack en productos reales",
-    period: "[PLACEHOLDER_RANGO_FECHAS]",
+    period: "2024 — presente",
     summary:
       "Participación en el ciclo completo: descubrimiento, implementación, pruebas y puesta en producción de aplicaciones orientadas a negocio.",
     highlights: [
