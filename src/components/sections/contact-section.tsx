@@ -1,11 +1,18 @@
-import { profile } from "@/data/profile";
+import type { Profile } from "@/data/types";
+import type { Dictionary } from "@/i18n/dictionary";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { ButtonLink } from "@/components/ui/button-link";
 
-export function ContactSection() {
+export function ContactSection({
+  profile,
+  dict,
+}: {
+  profile: Profile;
+  dict: Dictionary["contact"];
+}) {
   return (
-    <section id="contacto" className="scroll-mt-24 py-20 sm:py-24">
+    <section id="contact" className="scroll-mt-24 py-20 sm:py-24">
       <Container>
         <div className="border-border from-accent/15 via-background to-background relative overflow-hidden rounded-3xl border bg-gradient-to-br p-10 sm:p-14">
           <div
@@ -14,18 +21,18 @@ export function ContactSection() {
           />
           <SectionHeading
             align="center"
-            eyebrow="Contacto"
-            title="¿Tienes un producto que escalar o un equipo al que sumar un full stack?"
-            description="Escríbeme con contexto del proyecto, stack y ventana temporal. Respondo con honestidad sobre encaje, alcance y siguiente paso."
+            eyebrow={dict.eyebrow}
+            title={dict.title}
+            description={dict.description}
           />
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <ButtonLink
-              href={`mailto:${profile.email}?subject=Contacto%20desde%20portafolio`}
+              href={`mailto:${profile.email}?subject=${encodeURIComponent(dict.emailSubject)}`}
               variant="primary"
               external
               className="min-w-[200px]"
             >
-              Enviar email
+              {dict.sendEmail}
             </ButtonLink>
             <ButtonLink href={profile.linkedin} variant="secondary" external>
               LinkedIn
@@ -35,9 +42,7 @@ export function ContactSection() {
             </ButtonLink>
           </div>
           <p className="text-muted mx-auto mt-8 max-w-xl text-center text-sm">
-            Si más adelante quieres formulario con backend (Resend, Server Actions,
-            etc.), esta sección ya está aislada para sustituir el CTA sin rediseñar la
-            página.
+            {dict.note}
           </p>
         </div>
       </Container>

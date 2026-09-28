@@ -1,9 +1,10 @@
+/** `key` apunta al texto en `dictionary.nav`; los `href` son iguales en todos los idiomas. */
 export const siteNav = [
-  { href: "#sobre-mi", label: "Sobre mí" },
-  { href: "#stack", label: "Stack" },
-  { href: "#proyectos", label: "Proyectos" },
-  { href: "#experiencia", label: "Experiencia" },
-  { href: "#servicios", label: "Servicios" },
-  { href: "#certificaciones", label: "Certificados" },
-  { href: "#contacto", label: "Contacto" },
+  { href: "#about", key: "about" },
+  { href: "#stack", key: "stack" },
+  { href: "#projects", key: "projects" },
+  { href: "#experience", key: "experience" },
+  { href: "#services", key: "services" },
+  { href: "#certificates", key: "certificates" },
+  { href: "#contact", key: "contact" },
 ] as const;

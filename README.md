@@ -6,7 +6,8 @@ Portafolio profesional construido con **Next.js (App Router)**, **TypeScript** y
 
 | Área | Ubicación | Propósito |
 |------|-----------|-----------|
-| Páginas y metadata | `src/app/` | Rutas, `layout.tsx`, SEO, `robots.ts`, `sitemap.ts` |
+| Páginas y metadata | `src/app/` | Rutas por idioma (`[lang]/`), SEO, `robots.ts`, `sitemap.ts` |
+| Idiomas (i18n) | `src/i18n/` | Configuración de idiomas y diccionarios de UI (`en.ts`, `es.ts`) |
 | Secciones | `src/components/sections/` | Hero, Sobre mí, Stack, Proyectos, etc. |
 | Layout | `src/components/layout/` | Cabecera, pie |
 | UI reutilizable | `src/components/ui/` | Botones, cards, contenedor |
@@ -18,7 +19,8 @@ Portafolio profesional construido con **Next.js (App Router)**, **TypeScript** y
 
 - **Datos en TypeScript** (`src/data/`): tipado fuerte, sin CMS de momento; puedes migrar a CMS o MDX más adelante sin tocar la UI.
 - **Tema**: `next-themes` con clase `.dark` en `<html>` y tokens CSS en `globals.css` para un modo claro/oscuro coherente.
-- **SEO**: `metadata` central en `layout.tsx`, `PersonJsonLd` (JSON-LD), `sitemap.xml` y `robots.txt` generados.
+- **Idiomas**: el sitio abre en **inglés** (`/`) y tiene un botón en la cabecera para pasar a **español** (`/es`). Cada idioma es una página estática con su `<html lang>`, metadata y `hreflang`. El botón conserva la sección (`#hash`) al cambiar. `/` se sirve internamente desde `/en` (ver `rewrites`/`redirects` en `next.config.ts`).
+- **SEO**: `generateMetadata` por idioma en `src/app/[lang]/layout.tsx`, `PersonJsonLd` (JSON-LD), `sitemap.xml` (con alternates por idioma) y `robots.txt` generados.
 - **URL canónica**: `getSiteUrl()` en `src/lib/site.ts` usa `NEXT_PUBLIC_SITE_URL`, o `VERCEL_URL` en preview/producción, o `localhost` en desarrollo.
 
 ## Estructura de carpetas
@@ -26,11 +28,18 @@ Portafolio profesional construido con **Next.js (App Router)**, **TypeScript** y
 ```
 src/
   app/
+    [lang]/
+      layout.tsx
+      page.tsx
     globals.css
-    layout.tsx
-    page.tsx
     robots.ts
     sitemap.ts
+  i18n/
+    config.ts
+    dictionary.ts
+    en.ts
+    es.ts
+    localize.ts
   components/
     json-ld/
     layout/
@@ -55,11 +64,14 @@ src/
 
 ## Contenido que debes editar tú
 
+Todo texto visible existe en **inglés y español**: en `src/data/*` cada ítem tiene un bloque `copy: { en, es }` (edita ambos idiomas juntos), y los textos de interfaz (títulos de sección, botones, menú) están en `src/i18n/en.ts` y `src/i18n/es.ts`. TypeScript avisa si a `es.ts` le falta una clave que existe en `en.ts`.
+
 1. **`src/data/profile.ts`** — bio, ubicación (`[PLACEHOLDER_*]`), disponibilidad.
 2. **`src/data/projects.ts`** — textos, enlaces y stack por proyecto.
 3. **`src/data/certificates.ts`** — certificaciones Cursor u otras; añade `url` cuando tengas el enlace o PDF público.
 4. **`src/data/experience.ts`** y **`src/data/stack.ts`** — experiencia y tecnologías.
-5. **`.env.local`** (opcional) — copia de `.env.example` y define `NEXT_PUBLIC_SITE_URL` con tu dominio final.
+5. **`src/i18n/en.ts` / `src/i18n/es.ts`** — textos de la interfaz.
+6. **`.env.local`** (opcional) — copia de `.env.example` y define `NEXT_PUBLIC_SITE_URL` con tu dominio final.
 
 ## Desarrollo local
 
@@ -97,7 +109,7 @@ npm run lint    # ESLint
 
 ## Imagen Open Graph (opcional)
 
-Puedes añadir `src/app/opengraph-image.tsx` o un archivo estático `opengraph-image.png` en `app/`; Next.js lo enlazará automáticamente. Mientras tanto, los metadatos en `layout.tsx` ya definen título y descripción.
+Puedes añadir `src/app/opengraph-image.tsx` o un archivo estático `opengraph-image.png` en `app/`; Next.js lo enlazará automáticamente. Mientras tanto, los metadatos en `src/app/[lang]/layout.tsx` ya definen título y descripción.
 
 ## Licencia
 

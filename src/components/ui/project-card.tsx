@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import type { Project } from "@/data/types";
+import type { Dictionary } from "@/i18n/dictionary";
 import { cn } from "@/lib/utils";
 import { ButtonLink } from "@/components/ui/button-link";
 
@@ -17,9 +18,11 @@ const accentStyles: Record<Project["accent"], string> = {
 export function ProjectCard({
   project,
   index = 0,
+  labels,
 }: {
   project: Project;
   index?: number;
+  labels: Dictionary["projects"]["card"];
 }) {
   return (
     <motion.article
@@ -47,7 +50,7 @@ export function ProjectCard({
           </div>
           {project.featured ? (
             <span className="bg-background/70 text-accent border-border rounded-full border px-2 py-1 text-[10px] font-semibold uppercase tracking-wide">
-              Destacado
+              {labels.featured}
             </span>
           ) : null}
         </div>
@@ -57,11 +60,11 @@ export function ProjectCard({
         <p className="text-foreground text-sm leading-relaxed">{project.description}</p>
         <div className="space-y-2 text-sm">
           <p>
-            <span className="text-muted font-medium">Problema: </span>
+            <span className="text-muted font-medium">{labels.problem}: </span>
             <span className="text-foreground/90">{project.problem}</span>
           </p>
           <p>
-            <span className="text-muted font-medium">Impacto: </span>
+            <span className="text-muted font-medium">{labels.impact}: </span>
             <span className="text-foreground/90">{project.value}</span>
           </p>
         </div>
@@ -84,7 +87,7 @@ export function ProjectCard({
               external
               className="text-xs"
             >
-              {link.label}
+              {labels.links[link.type]}
             </ButtonLink>
           ))}
         </div>

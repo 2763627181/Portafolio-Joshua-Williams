@@ -1,19 +1,26 @@
-import { experienceItems } from "@/data/experience";
+import type { ExperienceItem } from "@/data/types";
+import type { Dictionary } from "@/i18n/dictionary";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 
-export function ExperienceSection() {
+export function ExperienceSection({
+  items,
+  dict,
+}: {
+  items: ExperienceItem[];
+  dict: Dictionary["experience"];
+}) {
   return (
-    <section id="experiencia" className="scroll-mt-24 border-border border-y py-20 sm:py-24">
+    <section id="experience" className="scroll-mt-24 border-border border-y py-20 sm:py-24">
       <Container>
         <SectionHeading
           className="mb-12"
-          eyebrow="Experiencia"
-          title="Cómo trabajo en proyectos"
-          description="No es una lista de cargos genéricos: es el tipo de impacto que busco dejar cuando colaboro con un equipo o un cliente."
+          eyebrow={dict.eyebrow}
+          title={dict.title}
+          description={dict.description}
         />
         <div className="space-y-8">
-          {experienceItems.map((item) => (
+          {items.map((item) => (
             <article
               key={item.id}
               className="border-border bg-surface/60 relative overflow-hidden rounded-2xl border p-8"

@@ -1,7 +1,14 @@
-import { profile } from "@/data/profile";
+import type { Profile } from "@/data/types";
+import type { Dictionary } from "@/i18n/dictionary";
 import { getSiteUrl } from "@/lib/site";
 
-export function PersonJsonLd() {
+export function PersonJsonLd({
+  profile,
+  knowsAbout,
+}: {
+  profile: Profile;
+  knowsAbout: Dictionary["meta"]["knowsAbout"];
+}) {
   const url = getSiteUrl();
   const sameAs = [profile.github, profile.linkedin].filter(Boolean);
 
@@ -18,13 +25,7 @@ export function PersonJsonLd() {
       addressLocality: "Santo Domingo Oeste",
       addressCountry: "DO",
     },
-    knowsAbout: [
-      "Desarrollo web full stack",
-      "Next.js",
-      "React",
-      "TypeScript",
-      "Arquitectura de software",
-    ],
+    knowsAbout,
   };
 
   return (

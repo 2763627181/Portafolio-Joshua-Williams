@@ -1,14 +1,21 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { profile } from "@/data/profile";
+import type { Profile } from "@/data/types";
+import type { Dictionary } from "@/i18n/dictionary";
 import { ButtonLink } from "@/components/ui/button-link";
 import { Container } from "@/components/ui/container";
 
-export function HeroSection() {
+export function HeroSection({
+  profile,
+  dict,
+}: {
+  profile: Profile;
+  dict: Dictionary["hero"];
+}) {
   return (
     <section
-      id="inicio"
+      id="home"
       className="relative overflow-hidden border-b border-transparent"
     >
       <div
@@ -29,7 +36,7 @@ export function HeroSection() {
               transition={{ duration: 0.4 }}
               className="text-accent mb-4 text-xs font-semibold uppercase tracking-[0.25em]"
             >
-              Full stack · Productos web
+              {dict.eyebrow}
             </motion.p>
             <motion.h1
               initial={{ opacity: 0, y: 12 }}
@@ -61,11 +68,11 @@ export function HeroSection() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="mt-10 flex flex-wrap items-center gap-3"
             >
-              <ButtonLink href="#proyectos" variant="primary">
-                Ver proyectos
+              <ButtonLink href="#projects" variant="primary">
+                {dict.viewProjects}
               </ButtonLink>
-              <ButtonLink href="#contacto" variant="secondary">
-                Contactar
+              <ButtonLink href="#contact" variant="secondary">
+                {dict.contact}
               </ButtonLink>
               <a
                 href={profile.github}
@@ -73,7 +80,7 @@ export function HeroSection() {
                 rel="noopener noreferrer"
                 className="text-muted hover:text-foreground px-3 text-sm font-medium transition"
               >
-                GitHub →
+                {dict.github}
               </a>
             </motion.div>
           </div>
@@ -87,10 +94,10 @@ export function HeroSection() {
             <div className="border-border mb-4 flex items-center justify-between border-b pb-4">
               <div>
                 <p className="text-muted text-xs font-medium uppercase tracking-wide">
-                  Enfoque
+                  {dict.focusLabel}
                 </p>
                 <p className="text-foreground mt-1 text-sm font-semibold">
-                  Producto, arquitectura, entrega
+                  {dict.focusTitle}
                 </p>
               </div>
               <span className="border-border bg-background/80 rounded-full border px-3 py-1 text-xs font-medium text-emerald-600 dark:text-emerald-400">
@@ -98,25 +105,12 @@ export function HeroSection() {
               </span>
             </div>
             <ul className="space-y-3 text-sm leading-relaxed">
-              <li className="flex gap-2">
-                <span className="text-accent mt-0.5">▹</span>
-                <span className="text-foreground/90">
-                  Interfaces claras y sistemas fáciles de mantener a largo plazo.
-                </span>
-              </li>
-              <li className="flex gap-2">
-                <span className="text-accent mt-0.5">▹</span>
-                <span className="text-foreground/90">
-                  Integración frontend, backend y despliegue con criterios de
-                  rendimiento.
-                </span>
-              </li>
-              <li className="flex gap-2">
-                <span className="text-accent mt-0.5">▹</span>
-                <span className="text-foreground/90">
-                  Comunicación técnica directa: trade-offs explícitos, sin humo.
-                </span>
-              </li>
+              {dict.points.map((point) => (
+                <li key={point} className="flex gap-2">
+                  <span className="text-accent mt-0.5">▹</span>
+                  <span className="text-foreground/90">{point}</span>
+                </li>
+              ))}
             </ul>
           </motion.div>
         </div>

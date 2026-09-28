@@ -2,9 +2,16 @@
 
 import { useTheme } from "next-themes";
 import { startTransition, useEffect, useState } from "react";
+import type { Dictionary } from "@/i18n/dictionary";
 import { cn } from "@/lib/utils";
 
-export function ThemeToggle({ className }: { className?: string }) {
+export function ThemeToggle({
+  labels,
+  className,
+}: {
+  labels: Dictionary["theme"];
+  className?: string;
+}) {
   const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -13,6 +20,10 @@ export function ThemeToggle({ className }: { className?: string }) {
       setMounted(true);
     });
   }, []);
+
+  const currentName =
+    labels.names[(resolvedTheme ?? "system") as keyof typeof labels.names] ??
+    labels.names.system;
 
   return (
     <button
@@ -23,14 +34,14 @@ export function ThemeToggle({ className }: { className?: string }) {
       )}
       aria-label={
         mounted
-          ? `Cambiar tema (actual: ${resolvedTheme ?? "sistema"})`
-          : "Cambiar tema"
+          ? `${labels.change} (${labels.current}: ${currentName})`
+          : labels.change
       }
       onClick={() =>
         setTheme(resolvedTheme === "dark" ? "light" : "dark")
       }
     >
-      <span className="sr-only">Alternar tema claro/oscuro</span>
+      <span className="sr-only">{labels.srOnly}</span>
       <span aria-hidden className="text-lg leading-none">
         {mounted && resolvedTheme === "dark" ? "☾" : "☀"}
       </span>

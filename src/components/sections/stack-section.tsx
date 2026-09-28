@@ -1,21 +1,28 @@
-import { stackCategories } from "@/data/stack";
+import type { StackCategory } from "@/data/types";
+import type { Dictionary } from "@/i18n/dictionary";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 
-export function StackSection() {
+export function StackSection({
+  categories,
+  dict,
+}: {
+  categories: StackCategory[];
+  dict: Dictionary["stack"];
+}) {
   return (
     <section id="stack" className="scroll-mt-24 border-border border-y bg-zinc-50/80 py-20 dark:bg-zinc-950/40 sm:py-24">
       <Container>
         <SectionHeading
           className="mb-12"
-          eyebrow="Stack"
-          title="Tecnologías y disciplinas"
-          description="Un stack moderno centrado en TypeScript, con énfasis en arquitectura limpia, DX y resultados en producción."
+          eyebrow={dict.eyebrow}
+          title={dict.title}
+          description={dict.description}
         />
         <div className="grid gap-6 md:grid-cols-3">
-          {stackCategories.map((group) => (
+          {categories.map((group) => (
             <div
-              key={group.category}
+              key={group.id}
               className="border-border bg-surface/80 flex flex-col rounded-2xl border p-6 shadow-sm"
             >
               <h3 className="text-foreground text-lg font-semibold tracking-tight">

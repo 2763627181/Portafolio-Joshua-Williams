@@ -1,19 +1,26 @@
-import { serviceItems } from "@/data/services";
+import type { ServiceItem } from "@/data/types";
+import type { Dictionary } from "@/i18n/dictionary";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 
-export function ServicesSection() {
+export function ServicesSection({
+  items,
+  dict,
+}: {
+  items: ServiceItem[];
+  dict: Dictionary["services"];
+}) {
   return (
-    <section id="servicios" className="scroll-mt-24 py-20 sm:py-24">
+    <section id="services" className="scroll-mt-24 py-20 sm:py-24">
       <Container>
         <SectionHeading
           className="mb-12"
-          eyebrow="Servicios"
-          title="Áreas donde aporto más valor"
-          description="Englobo lo que suele hacer falta cuando un producto web debe crecer sin volverse frágil: desde la interfaz hasta la base técnica que la sostiene."
+          eyebrow={dict.eyebrow}
+          title={dict.title}
+          description={dict.description}
         />
         <div className="grid gap-6 sm:grid-cols-2">
-          {serviceItems.map((s) => (
+          {items.map((s) => (
             <div
               key={s.id}
               className="group border-border bg-surface/50 hover:border-accent/25 relative rounded-2xl border p-6 transition"
